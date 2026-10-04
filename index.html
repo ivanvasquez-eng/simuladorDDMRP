@@ -942,9 +942,6 @@ function LoginScreen({ onLoginSuccess }) {
 // ======================= APP ROOT =======================
 function App() {
     const [session, setSession] = useLocalStorage('ddmrp_session', null);
-	if (!session) {
-	    return <LoginScreen onLoginSuccess={(email, name, picture) => setSession({ email, name, picture })} />;
-	}    
     const [activeTab, setActiveTab] = useState('maestros');
     const [rawProducts, setProducts] = useLocalStorage('ddmrp_products', []);
     const [rawNodes, setNodes] = useLocalStorage('ddmrp_nodes', []);
@@ -1036,6 +1033,10 @@ function App() {
 
     window.geminiContext = window.geminiContext || {};
     window.geminiContext.pestanaActual = activeTab; // Le dice a la IA en qué paso estás
+
+    if (!session) {
+    return <LoginScreen onLoginSuccess={(email, name, picture) => setSession({ email, name, picture })} />;
+    }    
 
     return (
         <div className="min-h-screen bg-gray-100 text-gray-800 font-sans flex flex-col h-screen overflow-hidden">
