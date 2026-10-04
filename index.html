@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DDMRP - Simulador Web v6.00</title>
+    <title>DDMRP - Simulador Web v7.00</title>
     <!-- Favicon de Buffer DDMRP -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><polygon points=%220,5 100,5 90,35 10,35%22 fill=%22%2322c55e%22/><polygon points=%2210,35 90,35 80,65 20,65%22 fill=%22%23eab308%22/><polygon points=%2220,65 80,65 70,95 30,95%22 fill=%22%23ef4444%22/></svg>">
     
@@ -16,10 +16,48 @@
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <style>
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fadeIn { animation: fadeIn 0.2s ease-out forwards; }
-    </style>
+<style>
+    /* Animaciones originales */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeIn { animation: fadeIn 0.2s ease-out forwards; }
+
+    /* 1. Código en línea (Fórmulas) */
+    code {
+        background-color: rgba(175, 184, 193, 0.2) !important; 
+        padding: 0.2em 0.4em !important;
+        border-radius: 6px !important; 
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+        font-size: 85% !important;
+        color: #24292f !important; 
+        font-weight: 400 !important; /* Elimina la negrilla */
+    }
+
+    /* 2. El asesino de comillas en las fórmulas */
+    code::before,
+    code::after,
+    .prose code::before,
+    .prose code::after {
+        content: none !important; /* Elimina los backticks automáticos */
+    }
+
+    /* 3. Citas (Blockquotes) */
+    blockquote {
+        border-left: 4px solid #d0d7de !important; 
+        background-color: transparent !important; 
+        padding: 0 1em !important;
+        margin: 1rem 0 !important;
+        color: #656d76 !important; 
+        font-style: normal !important; 
+    }
+
+    /* 4. El asesino de comillas en las citas */
+    blockquote p::before,
+    blockquote p::after,
+    .prose blockquote p::before,
+    .prose blockquote p::after {
+        content: none !important;
+    }
+</style>
 </head>
 <body class="bg-gray-100 min-h-screen overflow-hidden">
     <div id="root"></div>
@@ -603,7 +641,7 @@ const SmartTable = ({ columns, data, onEdit, onDelete, itemName }) => {
             const [isLoading, setIsLoading] = useState(true);
 
             // RECUERDA PONER AQUÍ TU URL RAW DEL GIST
-            const MANUAL_URL = 'https://gist.githubusercontent.com/ivanvasquez-eng/59cd63128445ac36fe70ff5b71b49230/raw/3ac5a21f1172f896a49df75876768b3d4cc95015/manual.md'; 
+            const MANUAL_URL = 'https://gist.githubusercontent.com/ivanvasquez-eng/59cd63128445ac36fe70ff5b71b49230/raw/f04c3facac110db7946ce79e157f31cf90c894d5/manual.md'; 
 
             // Función mágica: Convierte el Markdown en Pestañas Automáticamente
             const parseMarkdownToTabs = (mdText) => {
@@ -702,7 +740,7 @@ No se pudo acceder a la ruta.
 // ======================= COMPONENTE: GEMINI COPILOT GLOBAL =======================
         function GeminiCopilot() {
             const [isOpen, setIsOpen] = useState(false);
-            const [messages, setMessages] = useState([{ role: 'ai', text: '¡Hola! Soy tu Copiloto SCM impulsado por Gemini. ¿En qué te ayudo hoy?' }]);
+            const [messages, setMessages] = useState([{ role: 'ai', text: '¡Hola! Soy tu Copiloto de simulación DDMRP. ¿En qué te puedo ayudar?' }]);
             const [input, setInput] = useState('');
             const [isTyping, setIsTyping] = useState(false);
 
@@ -744,7 +782,7 @@ No se pudo acceder a la ruta.
                     {isOpen && (
                         <div className="bg-white border border-gray-200 rounded-xl shadow-2xl w-80 md:w-96 mb-4 flex flex-col overflow-hidden animate-fadeIn">
                             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-3 flex justify-between items-center text-white">
-                                <div className="font-bold text-sm flex items-center gap-2">✨ Gemini SCM Copilot</div>
+                                <div className="font-bold text-sm flex items-center gap-2">✨ Copiloto DDMRP</div>
                                 <button onClick={() => setIsOpen(false)} className="hover:text-red-200 transition text-lg leading-none">&times;</button>
                             </div>
                             
@@ -886,7 +924,7 @@ function App() {
                     <img src="Logo.png" alt="WA Logo" className="h-10 w-auto object-contain drop-shadow-md" />
                     <div className="flex flex-col text-left">
                         <h1 className="text-2xl font-normal tracking-wide text-white leading-none mt-1">Simulador WA DDMRP</h1>
-                        <span className="text-[10px] text-white/80 font-mono tracking-widest uppercase mt-1">v6.00 | Multi-Compañía</span>
+                        <span className="text-[10px] text-white/80 font-mono tracking-widest uppercase mt-1">v7.00 | Documentación centralizada y copiloto</span>
                     </div>
                 </div>
                 
