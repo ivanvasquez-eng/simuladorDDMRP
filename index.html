@@ -58,6 +58,31 @@
         content: none !important;
     }
 </style>
+<!-- ========================================== -->
+    <!-- 1. ANTI-CACHÉ PASIVO (Meta etiquetas)      -->
+    <!-- ========================================== -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <!-- ========================================== -->
+    <!-- 2. AUTO-REFRESCO INTELIGENTE (JavaScript)  -->
+    <!-- ========================================== -->
+    <script>
+      (function() {
+        // Cambia este número en el futuro (ej. "7.01", "8.00") cada vez que actualices tu app
+        var VERSION_ACTUAL = "7.00"; 
+        var versionGuardada = localStorage.getItem('simulador_version');
+
+        if (versionGuardada !== VERSION_ACTUAL) {
+          // Actualizamos el registro en el navegador del usuario
+          localStorage.setItem('simulador_version', VERSION_ACTUAL);
+          
+          // Forzamos la recarga desde el servidor (Hard Refresh automático)
+          window.location.reload(true);
+        }
+      })();
+    </script>
 </head>
 <body class="bg-gray-100 min-h-screen overflow-hidden">
     <div id="root"></div>
@@ -924,7 +949,7 @@ function App() {
                     <img src="Logo.png" alt="WA Logo" className="h-10 w-auto object-contain drop-shadow-md" />
                     <div className="flex flex-col text-left">
                         <h1 className="text-2xl font-normal tracking-wide text-white leading-none mt-1">Simulador WA DDMRP</h1>
-                        <span className="text-[10px] text-white/80 font-mono tracking-widest uppercase mt-1">v7.00 | Documentación centralizada y copiloto</span>
+                        <span className="text-[10px] text-white/80 font-mono tracking-widest mt-1">v7.00 | Documentación centralizada y agente IA</span>
                     </div>
                 </div>
                 
