@@ -860,16 +860,24 @@ function LoginScreen({ onLoginSuccess }) {
     const [errorMsg, setErrorMsg] = React.useState('');
 
     React.useEffect(() => {
-        if (window.google) {
-            window.google.accounts.id.initialize({
-                client_id: "215317293497-36tc9pd735kiqtdh7fqa9mth5qhblaie.apps.googleusercontent.com",
-                callback: handleCredentialResponse
-            });
-            window.google.accounts.id.renderButton(
-                document.getElementById("google-buttonDiv"),
-                { theme: "outline", size: "large", width: 280, text: "continue_with" }
-            );
-        }
+        const renderGoogleButton = () => {
+            // Verifica si el objeto de Google ya se terminó de descargar en el navegador
+            if (window.google && window.google.accounts) {
+                window.google.accounts.id.initialize({
+                    client_id: "215317293497-36tc9pd735kiqtdh7fqa9mth5qhblaie.apps.googleusercontent.com",
+                    callback: handleCredentialResponse
+                });
+                window.google.accounts.id.renderButton(
+                    document.getElementById("google-buttonDiv"),
+                    { theme: "outline", size: "large", width: 280, text: "continue_with" }
+                );
+            } else {
+                // Si aún no está listo, vuelve a preguntar en 100 milisegundos
+                setTimeout(renderGoogleButton, 100);
+            }
+        };
+        
+        renderGoogleButton();
     }, []);
 
     const handleCredentialResponse = async (response) => {
