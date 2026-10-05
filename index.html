@@ -724,7 +724,7 @@ No se pudo acceder a la ruta.
                         {/* Header del Modal */}
                         <div className="p-3 md:p-4 border-b flex justify-between items-center bg-gray-50 flex-shrink-0">
                             <h2 className="font-medium text-base md:text-lg text-[#009ada] flex items-center gap-2"><span>📚</span> Base de Conocimiento (Wiki)</h2>
-                            <button onClick={onClose} className="text-gray-400 hover:text-red-400 font-bold text-2xl leading-none transition">&times;</button>
+                            <button onClick={onClose} className="text-gray-400 hover:text-red-500 font-bold text-2xl leading-none transition">&times;</button>
                         </div>
                         
                         {isLoading ? (
@@ -814,12 +814,19 @@ No se pudo acceder a la ruta.
                             
                             <div className="p-4 h-80 overflow-y-auto bg-gray-50 flex flex-col gap-3 text-sm">
                                 {messages.map((msg, i) => (
-                                    <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                                        <div className={`max-w-[85%] p-2.5 rounded-lg ${msg.role === 'user' ? 'bg-indigo-100 text-indigo-900 rounded-tr-none' : 'bg-white border border-gray-200 text-gray-700 rounded-tl-none shadow-sm'}`}>
-                                            <p className="whitespace-pre-wrap text-xs">{msg.text}</p>
-                                        </div>
-                                    </div>
-                                ))}
+				    <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+				        <div className={`max-w-[85%] p-2.5 rounded-lg ${msg.role === 'user' ? 'bg-indigo-100 text-indigo-900 rounded-tr-none' : 'bg-white border border-gray-200 text-gray-700 rounded-tl-none shadow-sm overflow-x-auto'}`}>
+				            {msg.role === 'user' ? (
+				                <p className="whitespace-pre-wrap text-xs">{msg.text}</p>
+				            ) : (
+				                <div 
+				                    className="prose prose-sm max-w-none text-xs"
+				                    dangerouslySetInnerHTML={{ __html: marked.parse(msg.text || '') }} 
+				                />
+				            )}
+				        </div>
+				    </div>
+				))}
                                 {isTyping && (
                                     <div className="flex justify-start">
                                         <div className="bg-white border border-gray-200 p-2.5 rounded-lg rounded-tl-none shadow-sm flex gap-1">
